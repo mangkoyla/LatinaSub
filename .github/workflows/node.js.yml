@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: "LalatinaHub/LatinaSub"
+          repository: "mangkoyla/LatinaSub"
       - name: Get secrets
         run: |
           echo ${{ secrets.BOT_TOKEN }} > ./bot_token
@@ -26,12 +26,12 @@ jobs:
       - name: Setup Golang with cache
         uses: magnetikonline/action-golang-cache@v3
         with:
-          go-version: ~1.18
+          go-version: ~1.20
       - name: Install binaries
         run: |
           mkdir ./bin
           curl "https://github.com/tindy2013/subconverter/releases/download/v0.7.2/subconverter_linux64.tar.gz" -L -o ./bin/subconverter.tar.gz
-          go install -v -tags with_shadowsocksr,with_grpc github.com/sagernet/sing-box/cmd/sing-box@latest
+          go install -v -tags with_grpc github.com/sagernet/sing-box/cmd/sing-box@latest
           cp /home/runner/go/bin/sing-box ./bin/
           tar -xf ./bin/subconverter.tar.gz -C ./bin
           rm -rf ./bin/subconverter.tar.gz
